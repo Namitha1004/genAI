@@ -4,16 +4,16 @@ import { connect } from "mongoose";
 import { connectDB } from "./config/db.js";
 
 dotenv.config();
-
+const port = process.env.PORT || 1001;
 const app = express();
 
+app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('Server is ready');
-})
+app.get("/", (req, res) => {
+	res.send("Server is ready");
+});
 
-
-app.listen(3000, () => {
-    connectDB();
-    console.log('Server is running on http://localhost:3000');
+app.listen(port, () => {
+	connectDB();
+	console.log(`Server is running on http://localhost:${port}`);
 });

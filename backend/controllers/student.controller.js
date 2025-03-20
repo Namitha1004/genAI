@@ -81,26 +81,3 @@ export const deleteStudent = async (req, res) => {
 		res.status(500).json({ success: false, message: "Server Error" });
 	}
 };
-
-export const getParticipationByStudent = async (req, res) => {
-	const { studentId } = req.params;
-	try {
-		const participations = await Learner.find({
-			$or: [
-				{ student: studentId }, // Individual participation
-				{ members: studentId }, // Team participation
-			],
-		})
-			.populate("classroomId", "name date type description") // Populate classroom details
-			.populate("members", "name email usn") // Populate team members
-			.populate("student", "name email usn"); // Populate individual student details
-
-		for (var learnerion of participations) {
-			console.log(learnerion._id);
-		}
-		res.status(200).json({ success: true, data: participations });
-	} catch (error) {
-		console.error("Error fetching participation records:", error);
-		res.status(500).json({ success: false, message: "Server Error" });
-	}
-};

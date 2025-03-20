@@ -5,7 +5,7 @@ dotenv.config();
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-async function generateResponse(userInput) {
+async function generateQuestions(userInput) {
 	try {
 		const response = await openai.chat.completions.create({
 			model: "gpt-4o-mini",
@@ -13,7 +13,7 @@ async function generateResponse(userInput) {
 				{
 					role: "system",
 					content: `
-                        Purpose
+                        Purpose is to generate questions based on the topic given as a list
 					`,
 				},
 				{
@@ -32,4 +32,4 @@ async function generateResponse(userInput) {
 	}
 }
 
-export default generateResponse;
+export default generateQuestions;

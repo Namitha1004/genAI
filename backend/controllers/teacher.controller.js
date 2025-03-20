@@ -61,51 +61,6 @@ export const deleteTeacher = async (req, res) => {
 };
 
 // / Get available teachers (not assigned as instructors) for an classroom
-export const getAvailableTeachers = async (req, res) => {
-	try {
-		const { classroomId } = req.params;
-
-		if (!mongoose.Types.ObjectId.isValid(classroomId)) {
-			return res.status(400).json({ success: false, message: "Invalid Classroom ID" });
-		}
-
-		// Fetch all teachers
-		const allTeachers = await Teacher.find({});
-
-		// Fetch already assigned teachers
-		const assignedInstructors = await Instructor.find({ classroomId: new mongoose.Types.ObjectId(classroomId) }).select(
-			"teacherId"
-		);
-
-		const assignedTeacherIds = assignedInstructors.map((e) => e.teacherId.toString());
-
-		// Filter available teachers
-		const availableTeachers = allTeachers.filter((teacher) => !assignedTeacherIds.includes(teacher._id.toString()));
-
-		res.status(200).json({ success: true, data: availableTeachers });
-	} catch (error) {
-		console.error("Error fetching available teachers:", error);
-		res.status(500).json({ success: false, message: "Internal Server Error" });
-	}
-};
-
-export const getEvaluationRecord = async (req, res) => {
-	try {
-		const { teacherId } = req.params;
-		if (!mongoose.Types.ObjectId.isValid(teacherId)) {
-			return res.status(400).json({ success: false, message: "Invalid Instructor ID" });
-		}
-
-		const evaluationRecord = await Instructor.find({ teacherId: new mongoose.Types.ObjectId(teacherId) })
-			.select("classroomId")
-			.populate({ path: "classroomId", select: "name type" });
-
-		res.status(200).json({ success: true, data: evaluationRecord });
-	} catch (error) {
-		console.error("Error fetching evaluation records", error);
-		res.status(500).json({ success: false, message: "Internal Server Error" });
-	}
-};
 
 export const getTeacherByEmail = async (req, res) => {
 	try {
@@ -128,22 +83,22 @@ export const getTeacherByEmail = async (req, res) => {
 	}
 };
 
-export const getTeacherEvaluatorId = async (req, res) => {
-	const { teacherId, classroomId } = req.params;
+// export const getTeacherEvaluatorId = async (req, res) => {
+// 	const { teacherId, classroomId } = req.params;
 
-	try {
-		const assignedInstructor = await Instructor.findOne({
-			classroomId: new mongoose.Types.ObjectId(classroomId),
-			teacherId: new mongoose.Types.ObjectId(teacherId),
-		});
+// 	try {
+// 		const assignedInstructor = await Instructor.findOne({
+// 			classroomId: new mongoose.Types.ObjectId(classroomId),
+// 			teacherId: new mongoose.Types.ObjectId(teacherId),
+// 		});
 
-		if (!assignedInstructor) {
-			return res.status(404).json({ message: "Instructor not found" });
-		}
+// 		if (!assignedInstructor) {
+// 			return res.status(404).json({ message: "Instructor not found" });
+// 		}
 
-		res.status(200).json({ success: true, data: assignedInstructor._id });
-	} catch (error) {
-		console.error("Error fetching teacher's evaluation ID:", error);
-		res.status(500).json({ success: false, message: "Internal Server Error" });
-	}
-};
+// 		res.status(200).json({ success: true, data: assignedInstructor._id });
+// 	} catch (error) {
+// 		console.error("Error fetching teacher's evaluation ID:", error);
+// 		res.status(500).json({ success: false, message: "Internal Server Error" });
+// 	}
+// };

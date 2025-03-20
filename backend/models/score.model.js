@@ -8,29 +8,37 @@ const ScoreSchema = new mongoose.Schema(
 			required: true,
 		},
 
-		learnerId: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Learner",
+		// learnerId: {
+		// 	type: mongoose.Schema.Types.ObjectId,
+		// 	ref: "Learner",
+		// 	required: true,
+		// },
+		email: {
+			type: String,
 			required: true,
 		},
 
-		instructorId: {
+		quizId: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "Instructor",
+			ref: "Quiz",
 			required: true,
 		},
 
 		scores: [
 			{
-				questions: {
+				question: {
 					type: String,
 					required: true,
 				},
-				answers: {
+				userAnswer: {
 					type: String,
 					required: true,
 				},
-				gptScore: {
+				correctAnswer: {
+					type: String,
+					required: true,
+				},
+				score: {
 					type: Number,
 					required: true,
 					min: 0,
@@ -40,12 +48,6 @@ const ScoreSchema = new mongoose.Schema(
 
 		totalScore: {
 			type: Number,
-			required: true, // Must be calculated and passed during submission
-		},
-
-		comments: {
-			type: String,
-			default: "",
 		},
 	},
 	{ timestamps: true }

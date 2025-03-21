@@ -45,6 +45,16 @@ export const useScoreStore = create((set) => ({
 		return data.data;
 	},
 
+	fetchScoresByStudent: async (emailId) => {
+		const res = await fetch(`/api/scores/${emailId}`);
+		const data = await res.json();
+		if (!data.success) {
+			return { success: false, message: data.message };
+		}
+
+		return data.data;
+	},
+
 	updateScore: async (scoreId, updatedScore) => {
 		const res = await fetch(`/api/scores/${scoreId}`, {
 			method: "PUT",

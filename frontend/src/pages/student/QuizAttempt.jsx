@@ -17,7 +17,7 @@ const QuizAttempt = () => {
 	const [loading, setLoading] = useState(false);
 
 	const OPENAI_API_KEY =
-		"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"; // Replace this with your actual API key
+		"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"; // Replace this with your actual API key
 
 	// Fetch quiz data
 	useEffect(() => {

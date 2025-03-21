@@ -122,3 +122,20 @@ export const getScoresByQuizId = async (req, res) => {
 		res.status(500).json({ error: "Internal server error." });
 	}
 };
+
+export const getScoresByStudent = async (req, res) => {
+	const { email } = req.params;
+	try {
+		const scores = await Score.find({ email })
+			.populate("quizId", "scores") // Populate quiz title
+			.sort({ createdAt: -1 });
+
+		if (!scores.length) {
+			return res.status(404).json({ error: "No scores found for this student" });
+		}
+
+		res.status(200).json(scores);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};

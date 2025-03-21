@@ -15,10 +15,10 @@ export const AuthProvider = ({ children }) => {
 	// const [user, setUser] = useState({ email: "julie.mars@example.com" });
 	// const [role, setRole] = useState("teacher"); // Simulate teacher role
 
-	// const [user, setUser] = useState({ email: "alice.johnson@example.com" });
-	// const [role, setRole] = useState("student"); // Simulate student role
-	const [user, setUser] = useState({ email: "david.lee@example.com" });
+	const [user, setUser] = useState({ email: "alice.johnson@example.com" });
 	const [role, setRole] = useState("student"); // Simulate student role
+	// const [user, setUser] = useState({ email: "david.lee@example.com" });
+	// const [role, setRole] = useState("student"); // Simulate student role
 	// const [user, setUser] = useState({ email: "isro22cs@cmrit.ac.in" });
 	// const [role, setRole] = useState("student"); // Simulate student role
 

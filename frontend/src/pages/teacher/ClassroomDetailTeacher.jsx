@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import {
 	Container,
 	Typography,
@@ -98,8 +98,13 @@ const ClassroomDetailPage = () => {
 					{/* Create Quiz Button */}
 					{role === "teacher" && (
 						<>
-							<Button variant="contained" color="primary" onClick={handleCreateQuiz} sx={{ mt: 2 }}>
-								Create Quiz
+							<Button
+								variant="contained"
+								color="secondary"
+								onClick={() => navigate(`/classroom/${classroomId}/custom-quiz`)}
+								sx={{ mt: 2, ml: 2 }}
+							>
+								Custom Quiz
 							</Button>
 							<Button
 								variant="contained"
@@ -114,7 +119,7 @@ const ClassroomDetailPage = () => {
 					{role === "student" && (
 						<>
 							<Button variant="contained" color="primary" onClick={handleCreateQuiz} sx={{ mt: 2 }}>
-								Create Quiz
+								Custom Quiz
 							</Button>
 							<Button
 								variant="contained"
@@ -142,6 +147,12 @@ const ClassroomDetailPage = () => {
 										primary={learner?.student?.name || "Unknown"}
 										secondary={learner?.student?.email || "No email available"}
 									/>
+									<Link
+										to={`/classroom/${classroomId}/learner/${learner?.student?.email}/scores`}
+										style={{ marginLeft: "20px", textDecoration: "none", color: "#007bff" }}
+									>
+										View Scores
+									</Link>
 								</ListItem>
 							))}
 						</List>

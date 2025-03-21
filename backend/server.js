@@ -36,16 +36,14 @@ app.get("/", (req, res) => {
 	res.send("Server is ready");
 });
 
-import cors from "cors";
-
 // Enable CORS
-app.use(
-	cors({
-		origin: "http://localhost:5173", // Allow requests from your frontend
-		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-		credentials: true,
-	})
-);
+// app.use(
+// 	cors({
+// 		origin: "http://localhost:5173", // Allow requests from your frontend
+// 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+// 		credentials: true,
+// 	})
+// );
 
 app.listen(port, () => {
 	connectDB();

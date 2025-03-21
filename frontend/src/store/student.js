@@ -82,20 +82,6 @@ export const useStudentStore = create((set) => ({
 		}
 	},
 
-	findIfIsRegistered: async (studentId, eventId) => {
-		try {
-			const res = await fetch(`/api/students/is-registered/${studentId}/${eventId}`);
-			const data = await res.json();
-
-			if (!res.ok) throw new Error(data.message || "Failed to check registration status");
-
-			return data;
-		} catch (error) {
-			console.error("Find If Registered Error:", error);
-			return { success: false, message: error.message };
-		}
-	},
-
 	updateStudent: async (studentId, updatedStudent) => {
 		try {
 			const res = await fetch(`/api/students/${studentId}`, {

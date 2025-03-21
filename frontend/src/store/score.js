@@ -46,13 +46,20 @@ export const useScoreStore = create((set) => ({
 	},
 
 	fetchScoresByStudent: async (emailId) => {
-		const res = await fetch(`/api/scores/${emailId}`);
-		const data = await res.json();
-		if (!data.success) {
-			return { success: false, message: data.message };
-		}
+		try {
+			const res = await fetch(`/api/scores/${emailId}`);
+			const data = await res.json();
 
-		return data.data;
+			if (!res.ok) {
+				throw new Error(data.error || "Failed to fetch scores");
+			}
+
+			console.log("Scores fetched:", data);
+			return data;
+		} catch (error) {
+			console.error("Error fetching scores:", error.message);
+			return [];
+		}
 	},
 
 	updateScore: async (scoreId, updatedScore) => {

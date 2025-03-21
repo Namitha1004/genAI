@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import { Box } from "@mui/material";
-// import Navbar from "./components/Navbar.jsx";
 import HomePage from "./pages/shared/HomePage";
 import ClassroomDetailPage from "./pages/teacher/ClassroomDetailTeacher";
 import ClassroomDetailStudent from "./pages/student/ClassroomDetailStudent";
@@ -9,6 +8,10 @@ import QuizAttemptv2 from "./pages/student/QuizAttemptv2";
 import StandardCreateQuizPage from "./pages/teacher/StandardCreateQuizPage";
 import CustomCreateQuizPage from "./pages/teacher/CustomCreateQuizPage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Navbar from "./components/navbar";
+import ChatBox from "./components/ChatBox";
+import FlashcardGenerator from "./components/FlashCardGenerator";
+
 // import AuthCallback from "./context/AuthCallback.jsx";
 // import LoginPage from "./pages/shared/LoginPage.jsx";
 // import Register from "./pages/shared/Register.jsx";
@@ -63,7 +66,7 @@ function App() {
 	});
 	return (
 		<>
-			{/* <Navbar /> */}
+			<Navbar />
 			<ThemeProvider theme={theme}>
 				<Box
 					sx={{
@@ -76,6 +79,8 @@ function App() {
 				>
 					<Routes>
 						<Route path="/" element={<HomePage />} />
+						<Route path="/ai-chat" element={<ChatBox />} />
+						<Route path="/flash-cards" element={<FlashcardGenerator />} />
 						<Route path="/classroom/:classroomId" element={<ClassroomDetailPage />} />
 						<Route path="/student/classroom/:classroomId" element={<ClassroomDetailStudent />} />
 						<Route path="/classroom/:classroomId/quiz/:quizId/attempt" element={<QuizAttempt />} />

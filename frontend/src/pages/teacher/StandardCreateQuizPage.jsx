@@ -195,7 +195,7 @@ const CustomCreateQuizPage = () => {
 	const [questions, setQuestions] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const OPENAI_API_KEY =
-		"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";
+		"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";
 
 	const fetchQuizQuestions = async () => {
 		if (!topic.trim()) {

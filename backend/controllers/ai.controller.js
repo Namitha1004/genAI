@@ -1,5 +1,5 @@
 import generateQuestions from "../services/openai.service.js";
-// import generateResponse from "../services/openai.service.js";
+import generateResponse from "../services/openai.service.js";
 
 export const chatWithAI = async (req, res) => {
 	const { message } = req.body;

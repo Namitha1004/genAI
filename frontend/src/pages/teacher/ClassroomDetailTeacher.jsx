@@ -118,7 +118,12 @@ const ClassroomDetailPage = () => {
 					)}
 					{role === "student" && (
 						<>
-							<Button variant="contained" color="primary" onClick={handleCreateQuiz} sx={{ mt: 2 }}>
+							<Button
+								variant="contained"
+								color="primary"
+								onClick={() => navigate(`/classroom/${classroomId}/custom-quiz`)}
+								sx={{ mt: 2 }}
+							>
 								Custom Quiz
 							</Button>
 							<Button
